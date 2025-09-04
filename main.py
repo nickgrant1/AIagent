@@ -33,6 +33,7 @@ def main():
             - Read file contents
             - Execute Python files with optional arguments
             - Write or overwrite files
+            - Make new features
 
             All paths you provide should be relative to the working directory './calculator'. 
             You do not need to specify the working directory in your function calls as it is
@@ -69,9 +70,11 @@ def main():
                 function_call_result = call_function(fc, verbose)
                 try:
                     function_responses.append(types.Part(function_response=function_call_result.parts[0].function_response))
-                    #messages.append(types.Content(role='user', parts=[function_call_result.parts[0].function_response]))
                     if function_call_result.parts[0].function_response.response and verbose:
-                        print(f"-> {function_call_result.parts[0].function_response.response}")
+                        if 'result' in function_call_result.parts[0].function_response.response:
+                            print(f"-> {function_call_result.parts[0].function_response.response['result']}")
+                        else:
+                            print(f"-> {function_call_result.parts[0].function_response.response['error']}")
                 except Exception as e: 
                     raise Exception(f'Error calling functions: {e}')
                 
