@@ -14,14 +14,14 @@ def get_files_info(working_directory, directory="."):
         print(f'Error: Cannot list "{directory}" as it is outside the permitted working directory')
         return
 
+    result=[]
     for entry in os.scandir(dirAbs):
         if not entry.name[0].isalpha():
             continue
-        is_dir = entry.is_dir()
         
         size = entry.stat().st_size
-        print(f' - {entry.name}: file_size={size} bytes, is_dir={is_dir}')
-
+        result.append(f' - {entry.name}: file_size={size} bytes, is_dir={entry.is_dir()}')
+    return "\n".join(result)
         
     
 

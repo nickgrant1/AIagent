@@ -19,7 +19,7 @@ def main():
         to_print = render(expression, result)
         print(to_print)
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error: {e}. Please ensure the expression is enclosed in quotes.")
 
 
 if __name__ == "__main__":
